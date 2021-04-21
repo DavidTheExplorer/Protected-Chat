@@ -1,0 +1,13 @@
+# ProtectedChat ${project.version} Configuration File
+
+# ================= #
+# Hologram Settings #
+# ================= #
+
+Message Format: '%message%'
+
+# You put here the letter that represents your color(Default value is white)
+Messages Color ID: f
+
+# The plugin which ProtectedChat uses its functionality to create Holograms
+Holograms Provider: HolographicDisplays
