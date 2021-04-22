@@ -7,6 +7,7 @@ import dte.protectedchat.commands.ChatProtectCommand;
 import dte.protectedchat.holograms.displayer.SimpleHologramsDisplayer;
 import dte.protectedchat.listeners.ChatProtectionDisableListener;
 import dte.protectedchat.listeners.ChatProtectionListener;
+import dte.protectedchat.protectors.ChatProtector;
 import dte.protectedchat.protectors.HologramChatProtector;
 import dte.protectedchat.registry.ProtectionRegistry;
 import dte.protectedchat.registry.SimpleProtectionRegistry;
@@ -15,7 +16,7 @@ import dte.protectedchat.utils.ModernJavaPlugin;
 public class ProtectedChat extends ModernJavaPlugin
 {
 	private ProtectionRegistry protectionRegistry;
-	private HologramChatProtector globalChatProtector;
+	private ChatProtector globalChatProtector;
 	
 	private static ProtectedChat INSTANCE;
 	
