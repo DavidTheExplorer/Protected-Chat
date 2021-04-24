@@ -4,12 +4,14 @@ import static java.util.stream.Collectors.toMap;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.bukkit.entity.Player;
 
 import dte.protectedchat.protectors.ChatProtector;
+import dte.protectedchat.utils.ObjectUtils;
 
 public class SimpleProtectionRegistry implements ProtectionRegistry
 {
@@ -26,8 +28,7 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 	{
 		ChatProtector protector = this.playersProtectors.remove(protectedPlayer);
 		
-		if(protector != null)
-			protector.disable(protectedPlayer);
+		ObjectUtils.ifNotNull(protector, p -> p.disable(protectedPlayer));
 	}
 	
 	@Override
@@ -55,5 +56,18 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 		return this.playersProtectors.entrySet().stream()
 				.filter(entry -> entry.getValue().getClass().isAssignableFrom(protectorClass))
 				.collect(toMap(Entry::getKey, entry -> (P) entry.getValue()));
+	}
+
+	@Override
+	public void clear() 
+	{
+		for(Iterator<Player> iterator = this.playersProtectors.keySet().iterator(); iterator.hasNext(); )
+		{
+			Player protectedPlayer = iterator.next();
+			
+			getProtectorOf(protectedPlayer).disable(protectedPlayer);
+			
+			iterator.remove();
+		}
 	}
 }

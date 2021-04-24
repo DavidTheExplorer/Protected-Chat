@@ -1,4 +1,4 @@
-package dte.protectedchat.holograms.displayer;
+package dte.protectedchat.protectors.holograms.displayer;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

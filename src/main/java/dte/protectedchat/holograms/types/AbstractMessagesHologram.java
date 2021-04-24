@@ -1,9 +1,11 @@
-package dte.protectedchat.holograms;
+package dte.protectedchat.holograms.types;
 
 import java.util.Iterator;
 import java.util.Objects;
 
 import org.bukkit.entity.Player;
+
+import dte.protectedchat.holograms.MessagesHologram;
 
 public abstract class AbstractMessagesHologram implements MessagesHologram
 {
