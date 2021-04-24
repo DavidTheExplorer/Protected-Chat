@@ -50,9 +50,9 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 		return this.playersProtectors.keySet();
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") //safe, all of the returned protectors inherit from the provided class
 	@Override
-	public <P extends ChatProtector> Map<Player, P> getPlayersProtectedBy(Class<P> protectorClass) 
+	public <P extends ChatProtector> Map<Player, P> getPlayersProtectedBy(Class<P> protectorClass)
 	{
 		return this.playersProtectors.entrySet().stream()
 				.filter(entry -> entry.getValue().getClass().isAssignableFrom(protectorClass))
