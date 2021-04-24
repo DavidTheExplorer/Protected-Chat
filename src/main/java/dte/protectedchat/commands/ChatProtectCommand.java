@@ -95,6 +95,7 @@ public class ChatProtectCommand implements CommandExecutor
 		default:
 			player.sendMessage(ChatColor.RED + "/chatprotect");
 			player.sendMessage(ChatColor.RED + "/chatprotect info [player]");
+			player.sendMessage(ChatColor.RED + "/chatprotect reload");
 			return false;
 		}
 	}
