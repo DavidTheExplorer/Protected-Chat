@@ -1,6 +1,8 @@
-package dte.protectedchat.protectors.holograms.providers;
+package dte.protectedchat.protectors.holograms.providers.types;
 
 import org.bukkit.Bukkit;
+
+import dte.protectedchat.protectors.holograms.providers.HologramsProvider;
 
 public abstract class PluginHologramsProvider implements HologramsProvider
 {

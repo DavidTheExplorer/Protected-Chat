@@ -8,6 +8,7 @@ import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import dte.protectedchat.ProtectedChat;
 import dte.protectedchat.holograms.MessagesHDHologram;
 import dte.protectedchat.holograms.MessagesHologram;
+import dte.protectedchat.protectors.holograms.providers.types.PluginHologramsProvider;
 
 public class HolographicDisplaysProvider extends PluginHologramsProvider
 {
