@@ -1,9 +1,9 @@
-package dte.protectedchat.holograms.tasks;
+package dte.protectedchat.protectors.holograms.tasks;
 
 import org.bukkit.scheduler.BukkitRunnable;
 
-import dte.protectedchat.holograms.displayer.HologramsDisplayer;
-import dte.protectedchat.protectors.HologramChatProtector;
+import dte.protectedchat.protectors.holograms.HologramChatProtector;
+import dte.protectedchat.protectors.holograms.displayer.HologramsDisplayer;
 import dte.protectedchat.registry.ProtectionRegistry;
 
 public class HologramsFollowTask extends BukkitRunnable
@@ -20,7 +20,7 @@ public class HologramsFollowTask extends BukkitRunnable
 	@Override
 	public void run()
 	{
-		this.protectionRegistry.getPlayersProtectedBy(HologramChatProtector.class).forEach((player, hologramProtector) -> 
+		this.protectionRegistry.getPlayersProtectedBy(HologramChatProtector.class).forEach((player, hologramProtector) ->
 		{
 			hologramProtector.getHologramOf(player).ifPresent(hologram -> this.hologramsDisplayer.refreshFor(player, hologram));
 		});

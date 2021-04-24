@@ -1,4 +1,4 @@
-package dte.protectedchat.holograms.implementations;
+package dte.protectedchat.holograms;
 
 import static java.util.stream.Collectors.toList;
 
@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
 
-import dte.protectedchat.holograms.AbstractMessagesHologram;
-import dte.protectedchat.holograms.VanishableMessagesHologram;
+import dte.protectedchat.holograms.types.AbstractMessagesHologram;
+import dte.protectedchat.holograms.types.VanishableMessagesHologram;
 
 /*
  * HolographicDisplays Implementation

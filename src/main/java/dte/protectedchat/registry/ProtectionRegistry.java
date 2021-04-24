@@ -15,4 +15,5 @@ public interface ProtectionRegistry
 	ChatProtector getProtectorOf(Player protectedPlayer);
 	Collection<Player> getProtectedPlayers();
 	<P extends ChatProtector> Map<Player, P> getPlayersProtectedBy(Class<P> protectorClass);
+	void clear();
 }
