@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 import org.bukkit.entity.Player;
 
 import dte.protectedchat.protectors.ChatProtector;
-import dte.protectedchat.utils.ObjectUtils;
 
 public class SimpleProtectionRegistry implements ProtectionRegistry
 {
@@ -28,7 +27,9 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 	{
 		ChatProtector protector = this.playersProtectors.remove(protectedPlayer);
 		
-		ObjectUtils.ifNotNull(protector, p -> p.disable(protectedPlayer));
+		//the player might not be protected
+		if(protector != null)
+			protector.disable(protectedPlayer);
 	}
 	
 	@Override
@@ -48,7 +49,7 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 	{
 		return this.playersProtectors.keySet();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <P extends ChatProtector> Map<Player, P> getPlayersProtectedBy(Class<P> protectorClass) 
