@@ -14,7 +14,6 @@ import dte.protectedchat.protectors.holograms.displayer.HologramsDisplayer;
 import dte.protectedchat.protectors.holograms.providers.HologramsProvider;
 import dte.protectedchat.protectors.holograms.tasks.HologramsFollowTask;
 import dte.protectedchat.registry.ProtectionRegistry;
-import dte.protectedchat.utils.ObjectUtils;
 
 public class HologramChatProtector implements ChatProtector
 {
@@ -46,8 +45,9 @@ public class HologramChatProtector implements ChatProtector
 	{
 		MessagesHologram playerHologram = this.playersHologram.remove(protectedPlayer);
 		
-		//the player might not have spoken, so they don't have an hologram
-		ObjectUtils.ifNotNull(playerHologram, MessagesHologram::delete);
+		//the player might not have spoken - so they don't have an hologram
+		if(playerHologram != null)
+			playerHologram.delete();
 	}
 
 	public Optional<MessagesHologram> getHologramOf(Player owner)
