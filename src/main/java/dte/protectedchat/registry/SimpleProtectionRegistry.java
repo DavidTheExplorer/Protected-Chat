@@ -1,6 +1,6 @@
 package dte.protectedchat.registry;
 
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toList;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ import dte.protectedchat.protectors.ChatProtector;
 public class SimpleProtectionRegistry implements ProtectionRegistry
 {
 	private final Map<Player, ChatProtector> playersProtectors = new HashMap<>();
-	
+
 	@Override
 	public void protectWith(Player player, ChatProtector protector) 
 	{
@@ -26,12 +26,12 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 	public void disable(Player protectedPlayer) 
 	{
 		ChatProtector protector = this.playersProtectors.remove(protectedPlayer);
-		
+
 		//the player might not be protected
 		if(protector != null)
 			protector.disable(protectedPlayer);
 	}
-	
+
 	@Override
 	public boolean isProtected(Player player) 
 	{
@@ -43,20 +43,20 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 	{
 		return this.playersProtectors.get(protectedPlayer);
 	}
-	
+
 	@Override
 	public Collection<Player> getProtectedPlayers() 
 	{
 		return this.playersProtectors.keySet();
 	}
-	
-	@SuppressWarnings("unchecked") //safe, all of the returned protectors inherit from the provided class
+
 	@Override
-	public <P extends ChatProtector> Map<Player, P> getPlayersProtectedBy(Class<P> protectorClass)
+	public Collection<Player> getPlayersProtectedBy(ChatProtector protector) 
 	{
 		return this.playersProtectors.entrySet().stream()
-				.filter(entry -> entry.getValue().getClass().isAssignableFrom(protectorClass))
-				.collect(toMap(Entry::getKey, entry -> (P) entry.getValue()));
+				.filter(entry -> entry.getValue() == protector)
+				.map(Entry::getKey)
+				.collect(toList());
 	}
 
 	@Override
@@ -65,9 +65,9 @@ public class SimpleProtectionRegistry implements ProtectionRegistry
 		for(Iterator<Player> iterator = this.playersProtectors.keySet().iterator(); iterator.hasNext(); )
 		{
 			Player protectedPlayer = iterator.next();
-			
+
 			getProtectorOf(protectedPlayer).disable(protectedPlayer);
-			
+
 			iterator.remove();
 		}
 	}

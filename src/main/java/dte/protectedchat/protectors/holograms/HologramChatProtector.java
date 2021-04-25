@@ -28,14 +28,16 @@ public class HologramChatProtector implements ChatProtector
 		this.hologramsProvider = hologramsProvider;
 		this.messageConfiguration = messageConfiguration;
 		
-		new HologramsFollowTask(protectionRegistry, hologramsDisplayer).runTaskTimer(ProtectedChat.getInstance(), 0, 5);
+		new HologramsFollowTask(protectionRegistry, hologramsDisplayer, this).runTaskTimer(ProtectedChat.getInstance(), 0, 5);
 	}
 
 	@Override
 	public void onChat(Player protectedPlayer, String message)
 	{
 		MessagesHologram playerHologram = this.playersHologram.computeIfAbsent(protectedPlayer, this::createHologramFor);
-		playerHologram.addMessage(applyConfiguration(message));
+		
+		String formattedMessage = this.messageConfiguration.apply(message);
+		playerHologram.addMessage(formattedMessage);
 		
 		this.hologramsDisplayer.refreshFor(protectedPlayer, playerHologram);
 	}
@@ -69,11 +71,6 @@ public class HologramChatProtector implements ChatProtector
 		return hologram;
 	}
 	
-	private String applyConfiguration(String message) 
-	{
-		return this.messageConfiguration.getFormat().replace("%message%", message);
-	}
-	
 	public static class MessageConfiguration
 	{
 		private final String format;
@@ -85,6 +82,10 @@ public class HologramChatProtector implements ChatProtector
 		public String getFormat() 
 		{
 			return this.format;
+		}
+		public String apply(String message) 
+		{
+			return this.format.replace("%message%", message);
 		}
 	}
 }
