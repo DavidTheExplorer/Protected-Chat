@@ -1,7 +1,6 @@
 package dte.protectedchat.registry;
 
 import java.util.Collection;
-import java.util.Map;
 
 import org.bukkit.entity.Player;
 
@@ -13,7 +12,8 @@ public interface ProtectionRegistry
 	void disable(Player protectedPlayer);
 	boolean isProtected(Player player);
 	ChatProtector getProtectorOf(Player protectedPlayer);
+	
+	Collection<Player> getPlayersProtectedBy(ChatProtector protector);
 	Collection<Player> getProtectedPlayers();
-	<P extends ChatProtector> Map<Player, P> getPlayersProtectedBy(Class<P> protectorClass);
 	void clear();
 }
