@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import dte.protectedchat.protectors.ChatProtector;
 
-public interface ProtectionService
+public interface ProtectionService extends Iterable<Player>
 {
 	void protectWith(Player player, ChatProtector protector);
 	void disable(Player protectedPlayer);

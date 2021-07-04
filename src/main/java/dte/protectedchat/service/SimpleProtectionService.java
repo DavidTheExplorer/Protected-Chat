@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import dte.protectedchat.protectors.ChatProtector;
 
-public class SimpleProtectionService implements ProtectionService
+public class SimpleProtectionService extends AbstractProtectionService
 {
 	private final Map<Player, ChatProtector> playersProtectors = new HashMap<>();
 
