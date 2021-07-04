@@ -13,14 +13,14 @@ import dte.protectedchat.protectors.holograms.HologramChatProtector.MessageConfi
 import dte.protectedchat.protectors.holograms.displayer.SimpleHologramsDisplayer;
 import dte.protectedchat.protectors.holograms.providers.HologramsProvider;
 import dte.protectedchat.protectors.holograms.providers.HolographicDisplaysProvider;
-import dte.protectedchat.registry.ProtectionRegistry;
-import dte.protectedchat.registry.SimpleProtectionRegistry;
+import dte.protectedchat.service.ProtectionService;
+import dte.protectedchat.service.SimpleProtectionService;
 import dte.protectedchat.utils.ChatColorUtils;
 import dte.protectedchat.utils.ModernJavaPlugin;
 
 public class ProtectedChat extends ModernJavaPlugin
 {
-	private ProtectionRegistry protectionRegistry;
+	private ProtectionService protectionService;
 	private ChatProtector globalChatProtector;
 
 	private static ProtectedChat INSTANCE;
@@ -39,8 +39,8 @@ public class ProtectedChat extends ModernJavaPlugin
 		if(hologramsProvider == null || messageConfiguration == null)
 			return;
 		
-		this.protectionRegistry = new SimpleProtectionRegistry();
-		this.globalChatProtector = new HologramChatProtector(this.protectionRegistry, hologramsProvider, messageConfiguration, new SimpleHologramsDisplayer());
+		this.protectionService = new SimpleProtectionService();
+		this.globalChatProtector = new HologramChatProtector(this.protectionService, hologramsProvider, messageConfiguration, new SimpleHologramsDisplayer());
 
 		registerListeners();
 		registerCommands();
@@ -51,13 +51,13 @@ public class ProtectedChat extends ModernJavaPlugin
 	}
 	private void registerCommands() 
 	{
-		getCommand("chatprotect").setExecutor(new ChatProtectCommand(this.protectionRegistry, this.globalChatProtector));
+		getCommand("chatprotect").setExecutor(new ChatProtectCommand(this.protectionService, this.globalChatProtector));
 	}
 	private void registerListeners()
 	{
 		registerListeners(
-				new ChatProtectionListener(this.protectionRegistry),
-				new ChatProtectionDisableListener(this.protectionRegistry));
+				new ChatProtectionListener(this.protectionService),
+				new ChatProtectionDisableListener(this.protectionService));
 	}
 
 	private HologramsProvider parseHologramsProviderFromConfig() 

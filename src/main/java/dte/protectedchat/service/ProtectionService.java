@@ -1,4 +1,4 @@
-package dte.protectedchat.registry;
+package dte.protectedchat.service;
 
 import java.util.Collection;
 
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import dte.protectedchat.protectors.ChatProtector;
 
-public interface ProtectionRegistry
+public interface ProtectionService
 {
 	void protectWith(Player player, ChatProtector protector);
 	void disable(Player protectedPlayer);

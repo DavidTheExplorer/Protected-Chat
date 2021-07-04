@@ -17,16 +17,16 @@ import org.bukkit.event.HandlerList;
 
 import dte.protectedchat.ProtectedChat;
 import dte.protectedchat.protectors.ChatProtector;
-import dte.protectedchat.registry.ProtectionRegistry;
+import dte.protectedchat.service.ProtectionService;
 
 public class ChatProtectCommand implements CommandExecutor
 {
-	private final ProtectionRegistry protectionRegistry;
+	private final ProtectionService protectionService;
 	private final ChatProtector globalChatProtector;
 
-	public ChatProtectCommand(ProtectionRegistry protectionRegistry, ChatProtector globalChatProtector) 
+	public ChatProtectCommand(ProtectionService protectionService, ChatProtector globalChatProtector) 
 	{
-		this.protectionRegistry = protectionRegistry;
+		this.protectionService = protectionService;
 		this.globalChatProtector = globalChatProtector;
 	}
 
@@ -49,14 +49,14 @@ public class ChatProtectCommand implements CommandExecutor
 		switch(args.length)
 		{
 		case 0:
-			if(this.protectionRegistry.isProtected(player)) 
+			if(this.protectionService.isProtected(player)) 
 			{
-				this.protectionRegistry.disable(player);
+				this.protectionService.disable(player);
 				player.sendMessage(RED + "Your messages will now be sent to the global chat.");
 			}
 			else 
 			{
-				this.protectionRegistry.protectWith(player, this.globalChatProtector);
+				this.protectionService.protectWith(player, this.globalChatProtector);
 				player.sendMessage(GRAY + "Your chat is now protected by " + GOLD + "Holograms" + GRAY + ".");
 			}
 			return true;
@@ -65,7 +65,7 @@ public class ChatProtectCommand implements CommandExecutor
 			{
 				long before = System.currentTimeMillis();
 				
-				this.protectionRegistry.clear();
+				this.protectionService.clear();
 				
 				HandlerList.unregisterAll(ProtectedChat.getInstance());
 				
@@ -102,11 +102,11 @@ public class ChatProtectCommand implements CommandExecutor
 	
 	private ChatColor getStatusColor(Player player) 
 	{
-		return this.protectionRegistry.isProtected(player) ? GOLD : RED;
+		return this.protectionService.isProtected(player) ? GOLD : RED;
 	}
 
 	private String getStatus(Player player) 
 	{
-		return this.protectionRegistry.isProtected(player) ? "Protected" : "Unprotected";
+		return this.protectionService.isProtected(player) ? "Protected" : "Unprotected";
 	}
 }
