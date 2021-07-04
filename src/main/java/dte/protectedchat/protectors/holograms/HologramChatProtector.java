@@ -13,7 +13,7 @@ import dte.protectedchat.protectors.ChatProtector;
 import dte.protectedchat.protectors.holograms.displayer.HologramsDisplayer;
 import dte.protectedchat.protectors.holograms.providers.HologramsProvider;
 import dte.protectedchat.protectors.holograms.tasks.HologramsFollowTask;
-import dte.protectedchat.registry.ProtectionRegistry;
+import dte.protectedchat.service.ProtectionService;
 
 public class HologramChatProtector implements ChatProtector
 {
@@ -22,13 +22,13 @@ public class HologramChatProtector implements ChatProtector
 	private final HologramsProvider hologramsProvider;
 	private final MessageConfiguration messageConfiguration;
 	
-	public HologramChatProtector(ProtectionRegistry protectionRegistry, HologramsProvider hologramsProvider, MessageConfiguration messageConfiguration, HologramsDisplayer hologramsDisplayer) 
+	public HologramChatProtector(ProtectionService protectionService, HologramsProvider hologramsProvider, MessageConfiguration messageConfiguration, HologramsDisplayer hologramsDisplayer) 
 	{
 		this.hologramsDisplayer = hologramsDisplayer;
 		this.hologramsProvider = hologramsProvider;
 		this.messageConfiguration = messageConfiguration;
 		
-		new HologramsFollowTask(protectionRegistry, hologramsDisplayer, this).runTaskTimer(ProtectedChat.getInstance(), 0, 5);
+		new HologramsFollowTask(protectionService, hologramsDisplayer, this).runTaskTimer(ProtectedChat.getInstance(), 0, 5);
 	}
 
 	@Override

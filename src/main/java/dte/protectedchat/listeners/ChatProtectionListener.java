@@ -8,15 +8,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import dte.protectedchat.ProtectedChat;
-import dte.protectedchat.registry.ProtectionRegistry;
+import dte.protectedchat.service.ProtectionService;
 
 public class ChatProtectionListener implements Listener
 {
-	private final ProtectionRegistry protectionRegistry;
+	private final ProtectionService protectionService;
 	
-	public ChatProtectionListener(ProtectionRegistry protectionRegistry) 
+	public ChatProtectionListener(ProtectionService protectionService) 
 	{
-		this.protectionRegistry = protectionRegistry;
+		this.protectionService = protectionService;
 	}
 
 	@EventHandler
@@ -24,7 +24,7 @@ public class ChatProtectionListener implements Listener
 	{
 		Player player = event.getPlayer();
 		
-		if(!this.protectionRegistry.isProtected(player))
+		if(!this.protectionService.isProtected(player))
 			return;
 		
 		Bukkit.getScheduler().runTask(ProtectedChat.getInstance(), () -> 
@@ -33,7 +33,7 @@ public class ChatProtectionListener implements Listener
 			event.setCancelled(true);
 			player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
 			
-			this.protectionRegistry.getProtectorOf(player).onChat(player, event.getMessage());
+			this.protectionService.getProtectorOf(player).onChat(player, event.getMessage());
 		});
 	}
 }

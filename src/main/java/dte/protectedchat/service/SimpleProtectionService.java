@@ -1,4 +1,4 @@
-package dte.protectedchat.registry;
+package dte.protectedchat.service;
 
 import static java.util.stream.Collectors.toList;
 
@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import dte.protectedchat.protectors.ChatProtector;
 
-public class SimpleProtectionRegistry implements ProtectionRegistry
+public class SimpleProtectionService implements ProtectionService
 {
 	private final Map<Player, ChatProtector> playersProtectors = new HashMap<>();
 

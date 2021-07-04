@@ -5,15 +5,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import dte.protectedchat.registry.ProtectionRegistry;
+import dte.protectedchat.service.ProtectionService;
 
 public class ChatProtectionDisableListener implements Listener
 {
-	private final ProtectionRegistry protectionRegistry;
+	private final ProtectionService protectionService;
 
-	public ChatProtectionDisableListener(ProtectionRegistry protectionRegistry) 
+	public ChatProtectionDisableListener(ProtectionService protectionService) 
 	{
-		this.protectionRegistry = protectionRegistry;
+		this.protectionService = protectionService;
 	}
 
 	@EventHandler
@@ -21,7 +21,7 @@ public class ChatProtectionDisableListener implements Listener
 	{
 		Player player = event.getPlayer();
 		
-		if(this.protectionRegistry.isProtected(player))
-			this.protectionRegistry.disable(player);
+		if(this.protectionService.isProtected(player))
+			this.protectionService.disable(player);
 	}
 }
