@@ -36,9 +36,7 @@ public class HologramChatProtector implements ChatProtector
 	public void onChat(Player player, String message)
 	{
 		ChatHologram playerHologram = this.playersHolograms.computeIfAbsent(player, this::createHologramFor);
-		
-		String formattedMessage = this.messageConfiguration.apply(message);
-		playerHologram.addMessage(formattedMessage);
+		playerHologram.addMessage(this.messageConfiguration.apply(message));
 		
 		this.hologramDisplayer.refresh(player, playerHologram);
 	}
