@@ -1,6 +1,5 @@
 package dte.protectedchat.commands;
 
-import static org.bukkit.ChatColor.AQUA;
 import static org.bukkit.ChatColor.DARK_RED;
 import static org.bukkit.ChatColor.GOLD;
 import static org.bukkit.ChatColor.GRAY;
@@ -13,9 +12,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
 
-import dte.protectedchat.ProtectedChat;
 import dte.protectedchat.protectors.ChatProtector;
 import dte.protectedchat.service.ProtectionService;
 
@@ -24,8 +21,6 @@ public class ChatProtectCommand implements CommandExecutor
 	private final ProtectionService protectionService;
 	private final ChatProtector globalChatProtector;
 	
-	private static final ProtectedChat PROTECTED_CHAT = ProtectedChat.getInstance();
-
 	public ChatProtectCommand(ProtectionService protectionService, ChatProtector globalChatProtector) 
 	{
 		this.protectionService = protectionService;
@@ -62,24 +57,6 @@ public class ChatProtectCommand implements CommandExecutor
 				player.sendMessage(GRAY + "Your chat is now protected by " + GOLD + "Holograms" + GRAY + ".");
 			}
 			return true;
-			
-		case 1:
-			if(args[0].equalsIgnoreCase("reload")) 
-			{
-				long before = System.currentTimeMillis();
-				
-				this.protectionService.clear();
-				
-				HandlerList.unregisterAll(PROTECTED_CHAT);
-				
-				PROTECTED_CHAT.onDisable();
-				PROTECTED_CHAT.onEnable();
-				
-				long after = System.currentTimeMillis();
-				
-				player.sendMessage(GRAY + "Config was reloaded in " + AQUA + (after-before) + GRAY + " ms!");
-				return true;
-			}
 			
 		case 2:
 		{
