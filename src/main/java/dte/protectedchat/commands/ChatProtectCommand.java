@@ -62,6 +62,7 @@ public class ChatProtectCommand implements CommandExecutor
 				player.sendMessage(GRAY + "Your chat is now protected by " + GOLD + "Holograms" + GRAY + ".");
 			}
 			return true;
+			
 		case 1:
 			if(args[0].equalsIgnoreCase("reload")) 
 			{
@@ -79,6 +80,7 @@ public class ChatProtectCommand implements CommandExecutor
 				player.sendMessage(GRAY + "Config was reloaded in " + AQUA + (after-before) + GRAY + " ms!");
 				return true;
 			}
+			
 		case 2:
 		{
 			if(args[0].equalsIgnoreCase("info"))
@@ -94,6 +96,7 @@ public class ChatProtectCommand implements CommandExecutor
 				return true;
 			}
 		}
+		
 		default:
 			player.sendMessage(ChatColor.RED + "/chatprotect");
 			player.sendMessage(ChatColor.RED + "/chatprotect info [player]");

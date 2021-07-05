@@ -51,7 +51,6 @@ public class HDChatHologram extends AbstractChatHologram implements Vanishable
 		this.hdHologram.delete();
 	}
 
-
 	@Override
 	public String getMessage(int index)
 	{
