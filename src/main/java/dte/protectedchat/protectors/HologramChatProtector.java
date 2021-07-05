@@ -62,7 +62,7 @@ public class HologramChatProtector implements ChatProtector
 	{
 		ChatHologram hologram = this.hologramProvider.createHologram(owner, owner.getLocation());
 		
-		//remove the hologram after 5 seconds TODO: (make it based on the message's length)
+		//remove the hologram after 5 seconds
 		Bukkit.getScheduler().runTaskLater(PROTECTED_CHAT, () ->
 		{
 			hologram.delete();

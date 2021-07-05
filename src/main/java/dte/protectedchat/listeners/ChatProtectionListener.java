@@ -31,8 +31,9 @@ public class ChatProtectionListener implements Listener
 		
 		Bukkit.getScheduler().runTask(PROTECTED_CHAT, () -> 
 		{
-			//don't send the message, and hint the player about that
 			event.setCancelled(true);
+			
+			//hint the player his message wasn't sent
 			player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
 			
 			this.protectionService.getProtectorOf(player).onChat(player, event.getMessage());
