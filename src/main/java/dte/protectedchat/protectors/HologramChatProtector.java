@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import dte.protectedchat.ProtectedChat;
 import dte.protectedchat.holograms.ChatHologram;
-import dte.protectedchat.holograms.displayers.HologramsDisplayer;
+import dte.protectedchat.holograms.displayers.HologramDisplayer;
 import dte.protectedchat.holograms.providers.ChatHologramProvider;
 import dte.protectedchat.service.ProtectionService;
 import dte.protectedchat.tasks.HologramsFollowTask;
@@ -17,19 +17,19 @@ import dte.protectedchat.tasks.HologramsFollowTask;
 public class HologramChatProtector implements ChatProtector
 {
 	private final Map<Player, ChatHologram> playersHolograms = new HashMap<>();
-	private final HologramsDisplayer hologramsDisplayer;
+	private final HologramDisplayer hologramDisplayer;
 	private final ChatHologramProvider hologramProvider;
 	private final MessageConfiguration messageConfiguration;
 	
 	private static final ProtectedChat PROTECTED_CHAT = ProtectedChat.getInstance();
 	
-	public HologramChatProtector(ProtectionService protectionService, ChatHologramProvider hologramProvider, MessageConfiguration messageConfiguration, HologramsDisplayer hologramsDisplayer) 
+	public HologramChatProtector(ProtectionService protectionService, ChatHologramProvider hologramProvider, MessageConfiguration messageConfiguration, HologramDisplayer hologramDisplayer) 
 	{
-		this.hologramsDisplayer = hologramsDisplayer;
+		this.hologramDisplayer = hologramDisplayer;
 		this.hologramProvider = hologramProvider;
 		this.messageConfiguration = messageConfiguration;
 		
-		new HologramsFollowTask(protectionService, hologramsDisplayer, this).runTaskTimer(PROTECTED_CHAT, 0, 5);
+		new HologramsFollowTask(protectionService, hologramDisplayer, this).runTaskTimer(PROTECTED_CHAT, 0, 5);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class HologramChatProtector implements ChatProtector
 		String formattedMessage = this.messageConfiguration.apply(message);
 		playerHologram.addMessage(formattedMessage);
 		
-		this.hologramsDisplayer.refreshFor(protectedPlayer, playerHologram);
+		this.hologramDisplayer.refreshFor(protectedPlayer, playerHologram);
 	}
 
 	@Override
