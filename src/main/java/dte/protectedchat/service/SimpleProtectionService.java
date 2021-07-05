@@ -17,7 +17,7 @@ public class SimpleProtectionService implements ProtectionService
 	private final Map<Player, ChatProtector> playersProtectors = new HashMap<>();
 
 	@Override
-	public void protectWith(Player player, ChatProtector protector) 
+	public void protect(Player player, ChatProtector protector) 
 	{
 		this.playersProtectors.put(player, protector);
 	}
@@ -43,13 +43,7 @@ public class SimpleProtectionService implements ProtectionService
 	{
 		return this.playersProtectors.get(protectedPlayer);
 	}
-
-	@Override
-	public Collection<Player> getProtectedPlayers() 
-	{
-		return this.playersProtectors.keySet();
-	}
-
+	
 	@Override
 	public Collection<Player> getPlayersProtectedBy(ChatProtector protector) 
 	{
@@ -60,15 +54,21 @@ public class SimpleProtectionService implements ProtectionService
 	}
 
 	@Override
-	public void clear() 
+	public Collection<Player> getProtectedPlayers() 
 	{
-		for(Iterator<Player> iterator = this.playersProtectors.keySet().iterator(); iterator.hasNext(); )
-		{
-			Player protectedPlayer = iterator.next();
+		return this.playersProtectors.keySet();
+	}
+	
+	@Override
+	public void clear()
+	{
+		this.playersProtectors.forEach((player, protector) -> protector.disable(player));
+		this.playersProtectors.clear();
+	}
 
-			getProtectorOf(protectedPlayer).disable(protectedPlayer);
-
-			iterator.remove();
-		}
+	@Override
+	public Iterator<Player> iterator() 
+	{
+		return getProtectedPlayers().iterator();
 	}
 }
