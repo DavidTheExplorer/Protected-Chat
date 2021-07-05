@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 import dte.protectedchat.holograms.ChatHologram;
 
-public class SimpleHologramsDisplayer implements HologramDisplayer
+public class SimpleHologramDisplayer implements HologramDisplayer
 {
 	@Override
 	public void refreshFor(Player player, ChatHologram ownerHologram)
