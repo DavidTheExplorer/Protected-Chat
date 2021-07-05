@@ -1,17 +1,15 @@
-package dte.protectedchat.holograms.types;
+package dte.protectedchat.holograms;
 
 import java.util.Iterator;
 import java.util.Objects;
 
 import org.bukkit.entity.Player;
 
-import dte.protectedchat.holograms.MessagesHologram;
-
-public abstract class AbstractMessagesHologram implements MessagesHologram
+public abstract class AbstractChatHologram implements ChatHologram
 {
 	protected final Player owner;
 	
-	public AbstractMessagesHologram(Player owner) 
+	public AbstractChatHologram(Player owner) 
 	{
 		this.owner = owner;
 	}
@@ -52,7 +50,7 @@ public abstract class AbstractMessagesHologram implements MessagesHologram
 		if (getClass() != object.getClass())
 			return false;
 		
-		MessagesHologram other = (MessagesHologram) object;
+		ChatHologram other = (ChatHologram) object;
 		
 		return Objects.equals(getLocation(), other.getLocation());
 	}
