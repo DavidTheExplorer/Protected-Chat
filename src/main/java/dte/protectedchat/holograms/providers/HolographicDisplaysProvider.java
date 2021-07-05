@@ -12,6 +12,8 @@ import dte.protectedchat.holograms.providers.plugin.PluginHologramProvider;
 
 public class HolographicDisplaysProvider extends PluginHologramProvider
 {
+	private static final ProtectedChat PROTECTED_CHAT = ProtectedChat.getInstance();
+	
 	public HolographicDisplaysProvider()
 	{
 		super("HolographicDisplays");
@@ -20,6 +22,6 @@ public class HolographicDisplaysProvider extends PluginHologramProvider
 	@Override
 	public ChatHologram createHologram(Player owner, Location spawnLocation) 
 	{
-		return new HDChatHologram(owner, HologramsAPI.createHologram(ProtectedChat.getInstance(), spawnLocation));
+		return new HDChatHologram(owner, HologramsAPI.createHologram(PROTECTED_CHAT, spawnLocation));
 	}
 }

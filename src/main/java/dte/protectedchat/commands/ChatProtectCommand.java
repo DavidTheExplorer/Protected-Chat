@@ -23,6 +23,8 @@ public class ChatProtectCommand implements CommandExecutor
 {
 	private final ProtectionService protectionService;
 	private final ChatProtector globalChatProtector;
+	
+	private static final ProtectedChat PROTECTED_CHAT = ProtectedChat.getInstance();
 
 	public ChatProtectCommand(ProtectionService protectionService, ChatProtector globalChatProtector) 
 	{
@@ -65,13 +67,12 @@ public class ChatProtectCommand implements CommandExecutor
 			{
 				long before = System.currentTimeMillis();
 				
-				
 				this.protectionService.clear();
 				
-				HandlerList.unregisterAll(ProtectedChat.getInstance());
+				HandlerList.unregisterAll(PROTECTED_CHAT);
 				
-				ProtectedChat.getInstance().onDisable();
-				ProtectedChat.getInstance().onEnable();
+				PROTECTED_CHAT.onDisable();
+				PROTECTED_CHAT.onEnable();
 				
 				long after = System.currentTimeMillis();
 				

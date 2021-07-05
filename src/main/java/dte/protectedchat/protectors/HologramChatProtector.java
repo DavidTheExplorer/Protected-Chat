@@ -21,13 +21,15 @@ public class HologramChatProtector implements ChatProtector
 	private final ChatHologramProvider hologramProvider;
 	private final MessageConfiguration messageConfiguration;
 	
+	private static final ProtectedChat PROTECTED_CHAT = ProtectedChat.getInstance();
+	
 	public HologramChatProtector(ProtectionService protectionService, ChatHologramProvider hologramProvider, MessageConfiguration messageConfiguration, HologramsDisplayer hologramsDisplayer) 
 	{
 		this.hologramsDisplayer = hologramsDisplayer;
 		this.hologramProvider = hologramProvider;
 		this.messageConfiguration = messageConfiguration;
 		
-		new HologramsFollowTask(protectionService, hologramsDisplayer, this).runTaskTimer(ProtectedChat.getInstance(), 0, 5);
+		new HologramsFollowTask(protectionService, hologramsDisplayer, this).runTaskTimer(PROTECTED_CHAT, 0, 5);
 	}
 
 	@Override
@@ -61,7 +63,7 @@ public class HologramChatProtector implements ChatProtector
 		ChatHologram hologram = this.hologramProvider.createHologram(owner, owner.getLocation());
 		
 		//remove the hologram after 5 seconds TODO: (make it based on the message's length)
-		Bukkit.getScheduler().runTaskLater(ProtectedChat.getInstance(), () ->
+		Bukkit.getScheduler().runTaskLater(PROTECTED_CHAT, () ->
 		{
 			hologram.delete();
 			this.playersHolograms.remove(owner);

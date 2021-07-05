@@ -14,6 +14,8 @@ public class ChatProtectionListener implements Listener
 {
 	private final ProtectionService protectionService;
 	
+	private static final ProtectedChat PROTECTED_CHAT = ProtectedChat.getInstance();
+	
 	public ChatProtectionListener(ProtectionService protectionService) 
 	{
 		this.protectionService = protectionService;
@@ -27,7 +29,7 @@ public class ChatProtectionListener implements Listener
 		if(!this.protectionService.isProtected(player))
 			return;
 		
-		Bukkit.getScheduler().runTask(ProtectedChat.getInstance(), () -> 
+		Bukkit.getScheduler().runTask(PROTECTED_CHAT, () -> 
 		{
 			//don't send the message, and hint the player about that
 			event.setCancelled(true);
