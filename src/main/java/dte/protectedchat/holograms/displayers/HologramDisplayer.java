@@ -7,7 +7,7 @@ import dte.protectedchat.holograms.ChatHologram;
 @FunctionalInterface
 public interface HologramDisplayer
 {
-	void refreshFor(Player owner, ChatHologram ownerHologram);
+	void refresh(Player owner, ChatHologram ownerHologram);
 	
 	double PLAYER_HEIGHT = 2;
 }

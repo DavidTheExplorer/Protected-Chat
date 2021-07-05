@@ -25,7 +25,7 @@ public class HologramsFollowTask extends BukkitRunnable
 	{
 		for(Player player : this.protectionService.getPlayersProtectedBy(this.hologramChatProtector)) 
 		{
-			this.hologramChatProtector.getHologramOf(player).ifPresent(hologram -> this.hologramDisplayer.refreshFor(player, hologram));
+			this.hologramChatProtector.getHologramOf(player).ifPresent(hologram -> this.hologramDisplayer.refresh(player, hologram));
 		}
 	}
 }

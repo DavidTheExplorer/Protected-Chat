@@ -40,7 +40,7 @@ public class HologramChatProtector implements ChatProtector
 		String formattedMessage = this.messageConfiguration.apply(message);
 		playerHologram.addMessage(formattedMessage);
 		
-		this.hologramDisplayer.refreshFor(protectedPlayer, playerHologram);
+		this.hologramDisplayer.refresh(protectedPlayer, playerHologram);
 	}
 
 	@Override
