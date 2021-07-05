@@ -6,7 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 /**
- * Represents an Hologram that displays protected messages(that weren't sent to the global chat)
+ * Represents an Hologram that displays protected messages(that weren't sent to the global chat).
  */
 public interface ChatHologram extends Iterable<String>
 {
@@ -24,4 +24,15 @@ public interface ChatHologram extends Iterable<String>
 	void clear();
 	Collection<String> getMessages();
 	int size();
+	
+	
+	/**
+	 * Represents a ChatHologram that can be <i>temporarily</i> vanished.
+	 */
+	interface Vanishable extends ChatHologram
+	{
+		void vanish();
+		void appear();
+		boolean isVanished();
+	}
 }

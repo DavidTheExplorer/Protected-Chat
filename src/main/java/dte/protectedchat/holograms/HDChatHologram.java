@@ -11,12 +11,12 @@ import org.bukkit.entity.Player;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
 
-import dte.protectedchat.holograms.vanishable.VanishableChatHologram;
+import dte.protectedchat.holograms.ChatHologram.Vanishable;
 
 /*
  * HolographicDisplays Implementation
  */
-public class HDChatHologram extends AbstractChatHologram implements VanishableChatHologram
+public class HDChatHologram extends AbstractChatHologram implements Vanishable
 {
 	public final Hologram hdHologram;
 
