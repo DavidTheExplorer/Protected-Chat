@@ -56,7 +56,7 @@ public class ChatProtectCommand implements CommandExecutor
 			}
 			else 
 			{
-				this.protectionService.protectWith(player, this.globalChatProtector);
+				this.protectionService.protect(player, this.globalChatProtector);
 				player.sendMessage(GRAY + "Your chat is now protected by " + GOLD + "Holograms" + GRAY + ".");
 			}
 			return true;

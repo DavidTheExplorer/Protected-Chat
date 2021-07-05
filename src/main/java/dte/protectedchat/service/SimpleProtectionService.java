@@ -16,7 +16,7 @@ public class SimpleProtectionService extends AbstractProtectionService
 	private final Map<Player, ChatProtector> playersProtectors = new HashMap<>();
 
 	@Override
-	public void protectWith(Player player, ChatProtector protector) 
+	public void protect(Player player, ChatProtector protector) 
 	{
 		this.playersProtectors.put(player, protector);
 	}
