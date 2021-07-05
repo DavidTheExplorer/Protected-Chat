@@ -11,14 +11,14 @@ import org.bukkit.entity.Player;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
 
-import dte.protectedchat.holograms.vanishable.VanishableChatHologram;
+import dte.protectedchat.holograms.ChatHologram.Vanishable;
 
 /*
  * HolographicDisplays Implementation
  */
-public class HDChatHologram extends AbstractChatHologram implements VanishableChatHologram
+public class HDChatHologram extends AbstractChatHologram implements Vanishable
 {
-	public final Hologram hdHologram;
+	private final Hologram hdHologram;
 
 	public HDChatHologram(Player owner, Hologram hdHologram)
 	{
@@ -51,7 +51,6 @@ public class HDChatHologram extends AbstractChatHologram implements VanishableCh
 		this.hdHologram.delete();
 	}
 
-
 	@Override
 	public String getMessage(int index)
 	{
@@ -80,7 +79,7 @@ public class HDChatHologram extends AbstractChatHologram implements VanishableCh
 	}
 
 	@Override
-	public void clearMessages()
+	public void clear()
 	{
 		this.hdHologram.clearLines();
 	}

@@ -3,7 +3,7 @@ package dte.protectedchat;
 import org.bukkit.ChatColor;
 
 import dte.protectedchat.commands.ChatProtectCommand;
-import dte.protectedchat.holograms.displayers.SimpleHologramsDisplayer;
+import dte.protectedchat.holograms.displayers.SimpleHologramDisplayer;
 import dte.protectedchat.holograms.providers.ChatHologramProvider;
 import dte.protectedchat.listeners.ChatProtectionDisableListener;
 import dte.protectedchat.listeners.ChatProtectionListener;
@@ -37,7 +37,7 @@ public class ProtectedChat extends ModernJavaPlugin
 			return;
 		
 		this.protectionService = new SimpleProtectionService();
-		this.globalChatProtector = new HologramChatProtector(this.protectionService, hologramProvider, messageConfiguration, new SimpleHologramsDisplayer());
+		this.globalChatProtector = new HologramChatProtector(this.protectionService, hologramProvider, messageConfiguration, new SimpleHologramDisplayer());
 
 		registerListeners();
 		registerCommands();

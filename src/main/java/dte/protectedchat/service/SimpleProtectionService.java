@@ -23,13 +23,13 @@ public class SimpleProtectionService implements ProtectionService
 	}
 
 	@Override
-	public void disable(Player protectedPlayer) 
+	public void disable(Player player) 
 	{
-		ChatProtector protector = this.playersProtectors.remove(protectedPlayer);
+		ChatProtector protector = this.playersProtectors.remove(player);
 
 		//the player might not be protected
 		if(protector != null)
-			protector.disable(protectedPlayer);
+			protector.disable(player);
 	}
 
 	@Override
@@ -39,9 +39,9 @@ public class SimpleProtectionService implements ProtectionService
 	}
 
 	@Override
-	public ChatProtector getProtectorOf(Player protectedPlayer) 
+	public ChatProtector getProtectorOf(Player player) 
 	{
-		return this.playersProtectors.get(protectedPlayer);
+		return this.playersProtectors.get(player);
 	}
 	
 	@Override
