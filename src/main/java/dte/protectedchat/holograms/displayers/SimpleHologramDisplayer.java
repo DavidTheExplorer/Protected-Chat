@@ -8,13 +8,10 @@ import dte.protectedchat.holograms.ChatHologram;
 public class SimpleHologramDisplayer implements HologramDisplayer
 {
 	@Override
-	public void refreshFor(Player player, ChatHologram ownerHologram)
+	public void refreshFor(Player owner, ChatHologram ownerHologram)
 	{
-		 ownerHologram.moveTo(calculateLocation(player, ownerHologram));
-	}
-
-	private Location calculateLocation(Player owner, ChatHologram ownerHologram) 
-	{
-		return owner.getLocation().add(0, PLAYER_HEIGHT + ownerHologram.getHeight(), 0);
+		Location aboveOwner = owner.getLocation().add(0, PLAYER_HEIGHT + ownerHologram.getHeight(), 0);
+		
+		 ownerHologram.moveTo(aboveOwner);
 	}
 }
