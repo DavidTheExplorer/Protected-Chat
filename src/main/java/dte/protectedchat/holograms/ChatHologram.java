@@ -21,7 +21,7 @@ public interface ChatHologram extends Iterable<String>
 	void addMessage(String message);
 	void setMessage(int index, String message);
 	void deleteMessage(int index);
-	void clearMessages();
+	void clear();
 	Collection<String> getMessages();
 	int size();
 }

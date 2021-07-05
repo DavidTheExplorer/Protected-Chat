@@ -80,7 +80,7 @@ public class HDChatHologram extends AbstractChatHologram implements VanishableCh
 	}
 
 	@Override
-	public void clearMessages()
+	public void clear()
 	{
 		this.hdHologram.clearLines();
 	}
