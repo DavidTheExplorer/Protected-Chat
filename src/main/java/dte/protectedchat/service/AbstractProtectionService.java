@@ -26,6 +26,12 @@ public abstract class AbstractProtectionService implements ProtectionService
 	}
 	
 	@Override
+	public void clear()
+	{
+		getProtectedPlayers().forEach(this::disable);
+	}
+	
+	@Override
 	public Iterator<Player> iterator() 
 	{
 		return getProtectedPlayers().iterator();

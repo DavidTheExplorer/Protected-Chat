@@ -4,7 +4,6 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -57,18 +56,5 @@ public class SimpleProtectionService extends AbstractProtectionService
 				.filter(entry -> entry.getValue() == protector)
 				.map(Entry::getKey)
 				.collect(toList());
-	}
-
-	@Override
-	public void clear() 
-	{
-		for(Iterator<Player> iterator = this.playersProtectors.keySet().iterator(); iterator.hasNext(); )
-		{
-			Player protectedPlayer = iterator.next();
-
-			getProtectorOf(protectedPlayer).disable(protectedPlayer);
-
-			iterator.remove();
-		}
 	}
 }
