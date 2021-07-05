@@ -33,20 +33,20 @@ public class HologramChatProtector implements ChatProtector
 	}
 
 	@Override
-	public void onChat(Player protectedPlayer, String message)
+	public void onChat(Player player, String message)
 	{
-		ChatHologram playerHologram = this.playersHolograms.computeIfAbsent(protectedPlayer, this::createHologramFor);
+		ChatHologram playerHologram = this.playersHolograms.computeIfAbsent(player, this::createHologramFor);
 		
 		String formattedMessage = this.messageConfiguration.apply(message);
 		playerHologram.addMessage(formattedMessage);
 		
-		this.hologramDisplayer.refresh(protectedPlayer, playerHologram);
+		this.hologramDisplayer.refresh(player, playerHologram);
 	}
 
 	@Override
-	public void disable(Player protectedPlayer)
+	public void disable(Player player)
 	{
-		ChatHologram playerHologram = this.playersHolograms.remove(protectedPlayer);
+		ChatHologram playerHologram = this.playersHolograms.remove(player);
 		
 		//the player might not have spoken - so they don't have an hologram
 		if(playerHologram != null)
