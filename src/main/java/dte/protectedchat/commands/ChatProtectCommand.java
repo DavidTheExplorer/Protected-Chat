@@ -65,6 +65,7 @@ public class ChatProtectCommand implements CommandExecutor
 			{
 				long before = System.currentTimeMillis();
 				
+				
 				this.protectionService.clear();
 				
 				HandlerList.unregisterAll(ProtectedChat.getInstance());

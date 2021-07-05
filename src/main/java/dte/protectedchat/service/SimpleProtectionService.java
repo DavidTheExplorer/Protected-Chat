@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -11,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import dte.protectedchat.protectors.ChatProtector;
 
-public class SimpleProtectionService extends AbstractProtectionService
+public class SimpleProtectionService implements ProtectionService
 {
 	private final Map<Player, ChatProtector> playersProtectors = new HashMap<>();
 
@@ -42,13 +43,7 @@ public class SimpleProtectionService extends AbstractProtectionService
 	{
 		return this.playersProtectors.get(protectedPlayer);
 	}
-
-	@Override
-	public Collection<Player> getProtectedPlayers() 
-	{
-		return this.playersProtectors.keySet();
-	}
-
+	
 	@Override
 	public Collection<Player> getPlayersProtectedBy(ChatProtector protector) 
 	{
@@ -56,5 +51,24 @@ public class SimpleProtectionService extends AbstractProtectionService
 				.filter(entry -> entry.getValue() == protector)
 				.map(Entry::getKey)
 				.collect(toList());
+	}
+
+	@Override
+	public Collection<Player> getProtectedPlayers() 
+	{
+		return this.playersProtectors.keySet();
+	}
+	
+	@Override
+	public void clear()
+	{
+		this.playersProtectors.forEach((player, protector) -> protector.disable(player));
+		this.playersProtectors.clear();
+	}
+
+	@Override
+	public Iterator<Player> iterator() 
+	{
+		return getProtectedPlayers().iterator();
 	}
 }
