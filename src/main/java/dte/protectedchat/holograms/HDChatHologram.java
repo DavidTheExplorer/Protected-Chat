@@ -18,7 +18,7 @@ import dte.protectedchat.holograms.ChatHologram.Vanishable;
  */
 public class HDChatHologram extends AbstractChatHologram implements Vanishable
 {
-	public final Hologram hdHologram;
+	private final Hologram hdHologram;
 
 	public HDChatHologram(Player owner, Hologram hdHologram)
 	{
