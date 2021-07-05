@@ -1,10 +1,10 @@
-package dte.protectedchat.protectors.holograms.tasks;
+package dte.protectedchat.tasks;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import dte.protectedchat.protectors.holograms.HologramChatProtector;
-import dte.protectedchat.protectors.holograms.displayer.HologramsDisplayer;
+import dte.protectedchat.holograms.displayers.HologramsDisplayer;
+import dte.protectedchat.protectors.HologramChatProtector;
 import dte.protectedchat.service.ProtectionService;
 
 public class HologramsFollowTask extends BukkitRunnable

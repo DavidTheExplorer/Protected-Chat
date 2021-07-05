@@ -1,4 +1,4 @@
-package dte.protectedchat.protectors.holograms;
+package dte.protectedchat.protectors;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,24 +8,23 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import dte.protectedchat.ProtectedChat;
-import dte.protectedchat.holograms.MessagesHologram;
-import dte.protectedchat.protectors.ChatProtector;
-import dte.protectedchat.protectors.holograms.displayer.HologramsDisplayer;
-import dte.protectedchat.protectors.holograms.providers.HologramsProvider;
-import dte.protectedchat.protectors.holograms.tasks.HologramsFollowTask;
+import dte.protectedchat.holograms.ChatHologram;
+import dte.protectedchat.holograms.displayers.HologramsDisplayer;
+import dte.protectedchat.holograms.providers.ChatHologramProvider;
 import dte.protectedchat.service.ProtectionService;
+import dte.protectedchat.tasks.HologramsFollowTask;
 
 public class HologramChatProtector implements ChatProtector
 {
-	private final Map<Player, MessagesHologram> playersHologram = new HashMap<>();
+	private final Map<Player, ChatHologram> playersHolograms = new HashMap<>();
 	private final HologramsDisplayer hologramsDisplayer;
-	private final HologramsProvider hologramsProvider;
+	private final ChatHologramProvider hologramProvider;
 	private final MessageConfiguration messageConfiguration;
 	
-	public HologramChatProtector(ProtectionService protectionService, HologramsProvider hologramsProvider, MessageConfiguration messageConfiguration, HologramsDisplayer hologramsDisplayer) 
+	public HologramChatProtector(ProtectionService protectionService, ChatHologramProvider hologramProvider, MessageConfiguration messageConfiguration, HologramsDisplayer hologramsDisplayer) 
 	{
 		this.hologramsDisplayer = hologramsDisplayer;
-		this.hologramsProvider = hologramsProvider;
+		this.hologramProvider = hologramProvider;
 		this.messageConfiguration = messageConfiguration;
 		
 		new HologramsFollowTask(protectionService, hologramsDisplayer, this).runTaskTimer(ProtectedChat.getInstance(), 0, 5);
@@ -34,7 +33,7 @@ public class HologramChatProtector implements ChatProtector
 	@Override
 	public void onChat(Player protectedPlayer, String message)
 	{
-		MessagesHologram playerHologram = this.playersHologram.computeIfAbsent(protectedPlayer, this::createHologramFor);
+		ChatHologram playerHologram = this.playersHolograms.computeIfAbsent(protectedPlayer, this::createHologramFor);
 		
 		String formattedMessage = this.messageConfiguration.apply(message);
 		playerHologram.addMessage(formattedMessage);
@@ -45,27 +44,27 @@ public class HologramChatProtector implements ChatProtector
 	@Override
 	public void disable(Player protectedPlayer)
 	{
-		MessagesHologram playerHologram = this.playersHologram.remove(protectedPlayer);
+		ChatHologram playerHologram = this.playersHolograms.remove(protectedPlayer);
 		
 		//the player might not have spoken - so they don't have an hologram
 		if(playerHologram != null)
 			playerHologram.delete();
 	}
 
-	public Optional<MessagesHologram> getHologramOf(Player owner)
+	public Optional<ChatHologram> getHologramOf(Player owner)
 	{
-		return Optional.ofNullable(this.playersHologram.get(owner));
+		return Optional.ofNullable(this.playersHolograms.get(owner));
 	}
 
-	private MessagesHologram createHologramFor(Player owner)
+	private ChatHologram createHologramFor(Player owner)
 	{
-		MessagesHologram hologram = this.hologramsProvider.createHologram(owner, owner.getLocation());
+		ChatHologram hologram = this.hologramProvider.createHologram(owner, owner.getLocation());
 		
 		//remove the hologram after 5 seconds TODO: (make it based on the message's length)
 		Bukkit.getScheduler().runTaskLater(ProtectedChat.getInstance(), () ->
 		{
 			hologram.delete();
-			this.playersHologram.remove(owner);
+			this.playersHolograms.remove(owner);
 		}, 20 * 5);
 		
 		return hologram;

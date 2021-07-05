@@ -5,14 +5,14 @@ import java.util.Arrays;
 import org.bukkit.ChatColor;
 
 import dte.protectedchat.commands.ChatProtectCommand;
+import dte.protectedchat.holograms.displayers.SimpleHologramsDisplayer;
+import dte.protectedchat.holograms.providers.ChatHologramProvider;
+import dte.protectedchat.holograms.providers.HolographicDisplaysProvider;
 import dte.protectedchat.listeners.ChatProtectionDisableListener;
 import dte.protectedchat.listeners.ChatProtectionListener;
 import dte.protectedchat.protectors.ChatProtector;
-import dte.protectedchat.protectors.holograms.HologramChatProtector;
-import dte.protectedchat.protectors.holograms.HologramChatProtector.MessageConfiguration;
-import dte.protectedchat.protectors.holograms.displayer.SimpleHologramsDisplayer;
-import dte.protectedchat.protectors.holograms.providers.HologramsProvider;
-import dte.protectedchat.protectors.holograms.providers.HolographicDisplaysProvider;
+import dte.protectedchat.protectors.HologramChatProtector;
+import dte.protectedchat.protectors.HologramChatProtector.MessageConfiguration;
 import dte.protectedchat.service.ProtectionService;
 import dte.protectedchat.service.SimpleProtectionService;
 import dte.protectedchat.utils.ChatColorUtils;
@@ -32,15 +32,15 @@ public class ProtectedChat extends ModernJavaPlugin
 		
 		saveDefaultConfig();
 		
-		HologramsProvider hologramsProvider = parseHologramsProviderFromConfig();
+		ChatHologramProvider hologramProvider = parseHologramsProviderFromConfig();
 		MessageConfiguration messageConfiguration = parseMessagesConfigurationFromConfig();
 		
 		//if either is null, the plugin was shut down and a descriptive message was sent
-		if(hologramsProvider == null || messageConfiguration == null)
+		if(hologramProvider == null || messageConfiguration == null)
 			return;
 		
 		this.protectionService = new SimpleProtectionService();
-		this.globalChatProtector = new HologramChatProtector(this.protectionService, hologramsProvider, messageConfiguration, new SimpleHologramsDisplayer());
+		this.globalChatProtector = new HologramChatProtector(this.protectionService, hologramProvider, messageConfiguration, new SimpleHologramsDisplayer());
 
 		registerListeners();
 		registerCommands();
@@ -60,13 +60,11 @@ public class ProtectedChat extends ModernJavaPlugin
 				new ChatProtectionDisableListener(this.protectionService));
 	}
 
-	private HologramsProvider parseHologramsProviderFromConfig() 
+	private ChatHologramProvider parseHologramsProviderFromConfig() 
 	{
 		String configProviderName = getConfig().getString("Holograms.Provider");
 		
-		HologramsProvider[] allProviders = {new HolographicDisplaysProvider()};
-
-		HologramsProvider configProvider = Arrays.stream(allProviders)
+		ChatHologramProvider configProvider = Arrays.stream(new ChatHologramProvider[]{new HolographicDisplaysProvider()})
 				.filter(provider -> provider.getName().equalsIgnoreCase(configProviderName))
 				.findFirst()
 				.orElse(null);

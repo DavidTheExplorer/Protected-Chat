@@ -11,17 +11,16 @@ import org.bukkit.entity.Player;
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import com.gmail.filoghost.holographicdisplays.api.line.TextLine;
 
-import dte.protectedchat.holograms.types.AbstractMessagesHologram;
-import dte.protectedchat.holograms.types.VanishableMessagesHologram;
+import dte.protectedchat.holograms.vanishable.VanishableChatHologram;
 
 /*
  * HolographicDisplays Implementation
  */
-public class MessagesHDHologram extends AbstractMessagesHologram implements VanishableMessagesHologram
+public class HDChatHologram extends AbstractChatHologram implements VanishableChatHologram
 {
 	public final Hologram hdHologram;
 
-	public MessagesHDHologram(Player owner, Hologram hdHologram)
+	public HDChatHologram(Player owner, Hologram hdHologram)
 	{
 		super(owner);
 

@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 /**
  * Represents an Hologram that displays protected messages(that weren't sent to the global chat)
  */
-public interface MessagesHologram extends Iterable<String>
+public interface ChatHologram extends Iterable<String>
 {
 	Player getOwner();
 	Location getLocation();
