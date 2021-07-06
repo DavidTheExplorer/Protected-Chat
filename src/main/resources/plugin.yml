@@ -2,7 +2,7 @@ name: ProtectedChat
 main: dte.protectedchat.ProtectedChat
 version: ${project.version}
 api-version: 1.13
-description: Provides players multiple useful ways to protect their chat.
+description: Protects chat messages using multiple useful ways.
 softdepend: [HolographicDisplays]
 author: https://github.com/DavidTheExplorer
 commands:
